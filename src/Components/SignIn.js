@@ -8,7 +8,7 @@ function SignIn(props) {
       props.auth.signInWithPopup(provider);
     }
     return (
-      <button onClick={signInWithGoogle}>Sign in</button>
+      <button className="signIn" onClick={signInWithGoogle}>Sign in</button>
     )
   }
   

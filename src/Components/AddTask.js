@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 import firebase from 'firebase/app';
 
 function AddTask(props) {
-    const { register, handleSubmit, errors } = useForm(); // initialize the hook
+    const { register, handleSubmit } = useForm(); // initialize the hook
     const onSubmit = async (data, e) => {
         e.preventDefault();
+        props.togglePopup();
         const { uid } = props.auth.currentUser;
-
         await props.tasksRef.add({
             header: data.header,
             text: data.text,
@@ -17,18 +17,23 @@ function AddTask(props) {
             uid
         })
         e.target.reset(); // reset after form submit
+
     };
 
     return (
+        <section className="add-task">
+        <h1>New Task</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
             <label>Title</label>
             <input name="header" ref={register({ required: true })} /> {/* register an input */}
-            <label>Text</label>
+            <label>Notes</label>
             <textarea name="text" ref={register} />
-            <label>Completed</label>
+            <label>Completed
             <input type="checkbox" name="completed" ref={register} />
+            </label>
             <input type="submit" />
         </form>
+        </section>
     );
 }
 

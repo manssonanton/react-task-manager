@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 
 //
 import SignIn from './Components/SignIn'
@@ -16,14 +16,7 @@ import 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 firebase.initializeApp({
-  apiKey: "AIzaSyA2M8DtG18MFopLYAUDpu9N1zP-T9GMDkI",
-  authDomain: "task-manager-b616a.firebaseapp.com",
-  databaseURL: "https://task-manager-b616a.firebaseio.com",
-  projectId: "task-manager-b616a",
-  storageBucket: "task-manager-b616a.appspot.com",
-  messagingSenderId: "362146835371",
-  appId: "1:362146835371:web:df4602fcc2873bfe2e80ee",
-  measurementId: "G-YNL217R5W4"
+  
 });
 
 const auth = firebase.auth();
@@ -37,10 +30,15 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Task Man</h1>
+        <div className="logo-container">
+          <svg className="logo" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.25 8.891l-1.421-1.409-6.105 6.218-3.078-2.937-1.396 1.436 4.5 4.319 7.5-7.627z" /></svg>
+          <h1 className="logo-text">
+            TASK
+        </h1>
+        </div>
         {user ? <SignOut auth={auth} /> : <SignIn auth={auth} />}
       </header>
-      <section className="content"> 
+      <section className="content">
         {user ? <TaskRoom firestore={firestore} auth={auth} /> : <Home auth={auth} />}
       </section>
     </div>
